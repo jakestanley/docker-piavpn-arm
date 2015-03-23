@@ -1,5 +1,5 @@
-FROM ubuntu:14.04
-MAINTAINER "Jeff Bogatay <jeff@bogatay.com>"
+FROM resin/rpi-raspbian:jessie
+MAINTAINER "Chris Hutchinson <chris@equalkit.com>"
 
 ENV DEBIAN_FRONTEND noninteractive
 
