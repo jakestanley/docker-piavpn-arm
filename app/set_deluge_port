@@ -7,7 +7,7 @@ DEVICE=tun0
 CLIENTID=`cat /etc/openvpn/pia_client`
 
 # Get tun ip address
-LOCAL_IP=`ifconfig $DEVICE | grep 'inet addr:' | cut -d: -f2| cut -d' ' -f1`
+LOCAL_IP=`ip -o addr show $DEVICE | awk '$3 == "inet" {split($4,i,"/"); print i[1]; exit}'`
 
 # Get the port number for the forwarded port
 PORT=`curl -s -d "user=$USERNAME&pass=$PASSWORD&client_id=$CLIENTID&local_ip=$LOCAL_IP" https://www.privateinternetaccess.com/vpninfo/port_forward_assignment | head -1 | grep -Po "[0-9]*"`
