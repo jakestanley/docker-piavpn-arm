@@ -49,7 +49,8 @@ if [ ! -f /app/runonce ]; then
 	   
 	# configure PIA gateway
 	[ -z "${PIA_GATEWAY}" ] && echo "[crit] PIA_GATEWAY not specified" && exit 1
-	sed "s/^remote\s.*$/remote ${PIA_GATEWAY} 1194/" -i /etc/openvpn/default.conf	
+	sed "s/^remote\s.*$/remote ${PIA_GATEWAY} 1194/" -i /etc/openvpn/default.conf
+	echo "keepalive 10 60" >> /etc/openvpn/default.conf
 	
   #sanity check uid/gid
   if [ $DELUGE_UID -ne 0 -o $DELUGE_UID -eq 0 2>/dev/null ]; then
@@ -88,4 +89,3 @@ chown -R $DELUGE_UID:$DELUGE_GID /torrents
 
 # spin it up
 exec /usr/sbin/runsvdir-start
-                          
