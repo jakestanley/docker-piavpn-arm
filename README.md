@@ -1,7 +1,11 @@
-docker-piavpn
+docker-piavpn-arm
 ================
 
-Ubuntu:1404 based Privateinternetaccess.com vpn with torrents/proxy (openvpn, deluged, deluge-web, dante-server)
+Debian Jessie based Privateinternetaccess.com vpn with torrents/proxy (openvpn, deluged, deluge-web, dante-server)
+
+This is a fork of docker-piavpn that runs on ARM based machines such as Raspberry Pi.
+
+Tested working against on HypriotOS on Raspberry Pi 1
 
 Complete run command with all options
 
