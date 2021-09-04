@@ -8,6 +8,8 @@ CLIENTID=`cat /etc/openvpn/mvad_client`
 MVAD_PORT=`cat /etc/openvpn/mvad_port`
 
 # Get tun ip address
+echo "Getting IP of device '${DEVICE}'"
+ip -o addr show $DEVICE || exit 1
 LOCAL_IP=`ip -o addr show $DEVICE | awk '$3 == "inet" {split($4,i,"/"); print i[1]; exit}'`
 
 # Get the port number for the forwarded port
