@@ -3,7 +3,7 @@ docker-mullvad-deluge-arm
 
 Debian Jessie based mullvad.net vpn with torrents/proxy (openvpn, deluged, deluge-web, dante-server)
 
-This is a fork of docker-piavpn that works (TBC) with Mullvad VPN.
+This is a fork of docker-piavpn-arm that works (TBC) with Mullvad VPN.
 
 Tested (TBC) against on Raspberry Pi OS on Raspberry Pi 4.
 
