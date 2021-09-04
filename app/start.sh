@@ -27,10 +27,10 @@ if [ ! -f /app/runonce ]; then
  
 	# setup pia pw
 	if [ ! -f /config/openvpn/pw ]; then
-		[ -z "${PIA_USER}" ] && echo "[crit] PIA_USER not specified" && exit 1
-		[ -z "${PIA_PASS}" ] && echo "[crit] PIA_PASS not specified" && exit 1
-		echo "${PIA_USER}" > /etc/openvpn/pw
-		echo "${PIA_PASS}" >> /etc/openvpn/pw
+		[ -z "${SURF_USER}" ] && echo "[crit] SURF_USER not specified" && exit 1
+		[ -z "${SURF_PASS}" ] && echo "[crit] SURF_PASS not specified" && exit 1
+		echo "${SURF_USER}" > /etc/openvpn/pw
+		echo "${SURF_PASS}" >> /etc/openvpn/pw
 	fi
 	
 	# setup pia client
