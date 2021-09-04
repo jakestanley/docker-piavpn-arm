@@ -1,11 +1,13 @@
-docker-piavpn-arm
+docker-mullvad-deluge-arm
 ================
 
-Debian Jessie based Privateinternetaccess.com vpn with torrents/proxy (openvpn, deluged, deluge-web, dante-server)
+Debian Jessie based mullvad.net vpn with torrents/proxy (openvpn, deluged, deluge-web, dante-server)
 
-This is a fork of docker-piavpn that runs on ARM based machines such as Raspberry Pi.
+This is a fork of docker-piavpn that works (TBC) with Mullvad VPN.
 
-Tested working against on HypriotOS on Raspberry Pi 1
+Tested (TBC) against on Raspberry Pi OS on Raspberry Pi 4.
+
+Currently hardcoded to use a UK Manchester exit node.
 
 Complete run command with all options
 
@@ -18,11 +20,10 @@ Complete run command with all options
         -v /etc/localtime:/etc/localtime:ro \
         -e DELUGE_UID=500 -e DELUGE_GID=500 \
         -e HOST_SUBNET=192.168.1.0/24 \
-        -e PIA_USER=<user> \
-        -e PIA_PASS=<password> \
-        -e PIA_CLIENT=<optionalpiaclient> \
-        -e PIA_GATEWAY=piavpnaddress.com \        
-        jbogatay/piavpn
+        -e MVAD_USER=<user> \
+        -e MVAD_PASS=<password> \
+        -e MVAD_PORT=12345 \
+        jakestanley/docker-mullvad-deluge-arm
 
 
 Change directory mappings as appropriate (delugeconfig, torrents)
@@ -36,12 +37,5 @@ notes
 * If you want it to restart on reboot, add --restart=always
 * If you leave the DNS out, your local dns servers will be used.  Not good for privacy.
 * The NET_ADMIN capability is needed to create the TUN device
-* The host subnet needs to be in CIDR notation.   For example if your host network is 192.168.1.x with a netmask of 255.255.255.0, then HOST_SUBNET=192.168.1.0/24
-* The PIA_CLIENT is optional, but if you generate one yourself port mappings will be preserved between cold starts.   Here is one way to generate a PIA_CLIENT.
-
-
-    head -n 100 /dev/urandom | md5sum | tr -d " -"
-    
-
-* PIA_GATEWAY is just a pia vpn hostname.  (ca.privateinternetaccess.com, nl.privateinternetaccess.com, etc)
+* The host subnet needs to be in CIDR notation. For example if your host network is 192.168.1.x with a netmask of 255.255.255.0, then HOST_SUBNET=192.168.1.0/24
 * After running for the first time, setup deluge so all torrents begin with /torrents

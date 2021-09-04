@@ -25,32 +25,32 @@ if [ ! -f /app/runonce ]; then
 
   echo "Performing first time setup"
  
-	# setup pia pw
+	# setup mullvad pw
 	if [ ! -f /config/openvpn/pw ]; then
-		[ -z "${PIA_USER}" ] && echo "[crit] PIA_USER not specified" && exit 1
-		[ -z "${PIA_PASS}" ] && echo "[crit] PIA_PASS not specified" && exit 1
-		echo "${PIA_USER}" > /etc/openvpn/pw
-		echo "${PIA_PASS}" >> /etc/openvpn/pw
+		[ -z "${MVAD_USER}" ] && echo "[crit] MVAD_USER not specified" && exit 1
+		[ -z "${MVAD_PASS}" ] && echo "[crit] MVAD_PASS not specified" && exit 1
+		echo "${MVAD_USER}" > /etc/openvpn/pw
+		echo "${MVAD_PASS}" >> /etc/openvpn/pw
 	fi
 	
-	# setup pia client
-	if [ ! -f /etc/openvpn/pia_client ]; then
-		if [ -z "${PIA_CLIENT}" ]; then
+	# setup mullvad client
+	if [ ! -f /etc/openvpn/mvad_client ]; then
+		if [ -z "${MVAD_CLIENT}" ]; then
 	  	client_id=`head -n 100 /dev/urandom | md5sum | tr -d " -"`
-	  	echo "[info] PIA client set to $client_id"
-	  	echo "$client_id" > /etc/openvpn/pia_client
+	  	echo "[info] MVAD client set to $client_id"
+	  	echo "$client_id" > /etc/openvpn/mvad_client
 	  else
-	  	echo "[info] using environment pia client id"
-	  	echo "${PIA_CLIENT}" > /etc/openvpn/pia_client
+	  	echo "[info] using environment mullvad client id"
+	  	echo "${MVAD_CLIENT}" > /etc/openvpn/mvad_client
 	  fi
 	else
-	  echo "[notice] using existing pia client id"
+	  echo "[notice] using existing mullvad client id"
 	fi   
 	   
-	# configure PIA gateway
-	[ -z "${PIA_GATEWAY}" ] && echo "[crit] PIA_GATEWAY not specified" && exit 1
-	sed "s/^remote\s.*$/remote ${PIA_GATEWAY} 1194/" -i /etc/openvpn/default.conf
-	echo "keepalive 10 60" >> /etc/openvpn/default.conf
+	# configure MVAD gateway
+	#[ -z "${MVAD_GATEWAY}" ] && echo "[crit] MVAD_GATEWAY not specified" && exit 1
+	#sed "s/^remote\s.*$/remote ${MVAD_GATEWAY} 1196/" -i /etc/openvpn/default.conf
+	#echo "keepalive 10 60" >> /etc/openvpn/default.conf
 	
   #sanity check uid/gid
   if [ $DELUGE_UID -ne 0 -o $DELUGE_UID -eq 0 2>/dev/null ]; then
