@@ -32,6 +32,12 @@ if [ ! -f /app/runonce ]; then
 		echo "${MVAD_USER}" > /etc/openvpn/pw
 		echo "${MVAD_PASS}" >> /etc/openvpn/pw
 	fi
+
+    # setup mullvad port
+    if [ ! -f /config/openvpn/mvad_port ]; then
+        [ -z "${MVAD_PORT}" ] && echo "[crit] MVAD_PORT not specified" && exit 1
+        echo "${MVAD_PORT}" > /etc/openvpn/mvad_port
+    fi
 	
 	# setup mullvad client
 	if [ ! -f /etc/openvpn/mvad_client ]; then
